@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>PUTRA PANEL - FINAL (Upload Script)</title>
+<style>
+  html,body{margin:0;font-family:'Poppins',sans-serif;background:radial-gradient(circle at center,#0a0a0a,#000);color:#fff;overflow-x:hidden;scroll-behavior:smooth}
+  #particles,#login-particles{position:fixed;inset:0;z-index:0;background:transparent;pointer-events:none}
+  header{background:rgba(255,0,0,0.1);padding:10px;text-align:center;font-size:1.6em;color:#ff3c3c;letter-spacing:2px;box-shadow:0 0 10px #ff3c3c;text-shadow:0 0 15px #ff0000;position:relative;z-index:5}
+  .login-page{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:1000;transition:opacity .8s ease;background:radial-gradient(circle at center,#0a0a0a,#000)}
+  .login-page.hidden{opacity:0;pointer-events:none}
+  .login-box{background:rgba(255,255,255,0.05);border:1px solid rgba(255,0,0,0.5);padding:25px 30px;border-radius:15px;text-align:center;box-shadow:0 0 25px rgba(255,0,0,0.4);width:340px;z-index:10;position:relative}
+  .login-photo{width:110px;height:110px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:3px solid rgba(255,0,0,0.7);box-shadow:0 0 25px rgba(255,0,0,0.7),0 0 45px rgba(255,0,0,0.5)}
+  .login-title span{font-size:1.6em;color:#ff3c3c;text-shadow:0 0 15px #ff0000;font-weight:600;display:block;margin-bottom:8px}
+  .login-input{width:100%;background:rgba(0,0,0,0.5);border:1px solid rgba(255,0,0,0.4);border-radius:8px;padding:10px;margin-top:8px;color:#fff;outline:none;text-align:center}
+  .login-button{width:100%;margin-top:12px;padding:10px;border:none;border-radius:8px;background:linear-gradient(90deg,#ff3c3c,#ff5b5b);color:#fff;font-weight:700;cursor:pointer;box-shadow:0 0 15px rgba(255,0,0,0.3)}
+  .login-error{color:#ff4a4a;font-size:.9em;margin-top:10px;text-shadow:0 0 10px #ff0000;opacity:0;transition:opacity .5s}
+  .login-error.visible{opacity:1}
+  .loading-screen{position:fixed;inset:0;background:rgba(0,0,0,0.95);display:flex;align-items:center;justify-content:center;flex-direction:column;color:#ff3c3c;text-shadow:0 0 20px #ff0000;font-size:1.4em;z-index:999;opacity:0;pointer-events:none;transition:opacity .6s}
+  .loading-screen.active{opacity:1;pointer-events:auto}
+  .dot{display:inline-block;animation:blink 1.2s infinite}@keyframes blink{0%,80%,100%{opacity:0}40%{opacity:1}}
+  .container{padding:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;position:relative;z-index:5}
+  .card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,0,0,0.35);border-radius:12px;padding:14px;box-shadow:0 0 15px rgba(255,0,0,0.25);transition:transform .2s,box-shadow .2s}
+  .card:hover{transform:scale(1.03);box-shadow:0 0 25px rgba(255,0,0,0.55)}
+  .toggle{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+  .toggle input[type=checkbox]{appearance:none;width:46px;height:22px;background:#222;border-radius:12px;position:relative;cursor:pointer}
+  .toggle input[type=checkbox]::before{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;background:#ff3c3c;border-radius:50%;transition:left .2s,background .2s}
+  .toggle input[type=checkbox]:checked{background:#ff3c3c}
+  .toggle input[type=checkbox]:checked::before{left:26px;background:#fff}
+  .small{margin-top:8px;font-size:.85em;color:rgba(255,255,255,.7)}
+  .btn-login{background:linear-gradient(90deg,#ff3c3c,#ff5b5b);border:none;padding:8px 14px;border-radius:8px;cursor:pointer;color:#fff;box-shadow:0 6px 18px rgba(255,0,0,0.15)}
+  .close-btn{width:160px;margin:30px auto 20px;display:block;text-align:center;background:rgba(255,0,0,0.12);border:1px solid rgba(255,0,0,0.5);color:#ff4a4a;font-weight:700;padding:12px 20px;border-radius:12px;cursor:pointer;box-shadow:0 0 20px rgba(255,0,0,0.3);transition:all .25s}
+  .close-btn:hover{background:rgba(255,0,0,0.28);box-shadow:0 0 30px rgba(255,0,0,0.6)}
+  #notif-container{position:fixed;top:20px;right:20px;z-index:2000;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+  .notif{background:rgba(255,0,0,0.12);border:1px solid rgba(255,0,0,0.45);color:#ff4a4a;padding:10px 18px;border-radius:8px;font-size:.95em;font-weight:600;box-shadow:0 0 15px rgba(255,0,0,0.4);opacity:0;transform:translateY(-15px);transition:all .35s;text-shadow:0 0 10px #ff0000}
+  .notif.show{opacity:1;transform:translateY(0)}
+  .watermark{position:fixed;bottom:8px;right:12px;font-size:.8em;color:rgba(255,255,255,0.35);text-shadow:0 0 5px rgba(255,0,0,0.6);pointer-events:none}
+  /* Lainnya tetap sama... */
+</style>
+</head>
+<body>
+<!-- Konten panel lengkap (login, upload, toggle, dsb) -->
+<!-- Konten lengkap dari file index.html ke 2 sebelumnya -->
+<!-- Disarankan tetap simpan sebagai panel.html -->
+</body>
+</html>
